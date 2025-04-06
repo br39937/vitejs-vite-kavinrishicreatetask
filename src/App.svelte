@@ -4,28 +4,30 @@
   import Counter from './lib/Counter.svelte'
   import Connect4 from './lib/Connect4.svelte'
   
-  let player:number = 0
+  let player:number = 2
   let gridArray = Array(7).fill(null).map(() => Array(6).fill(null));// i used ai claude 3.7 on claude.ai to make this 2d array
   let storageArray = Array(7).fill(null).map(() => Array(6).fill(null));// this is a 2d array of 7 arrays of length 6
 
   storageArray.push(Array(7).fill(5))// dont consider this part of the 2d array but it is  an array that stores the height of the columns
 
-  function changeCellColor(col: number, row: number, color: string) {
+  function changeCellColor(col: number, row: number, color: string, player: number) {
     if (gridArray[col][row]) {
         gridArray[col][row].update(color);
+        storageArray[col][row].update(player)
+
     }
   }
   function place(col:number,color: string){
     if(storageArray[7][col]>=0){
       let realcolor:string = "#00000"
-      if(player == 0){
-        player =1;
-        realcolor = "#FF0000";
+      if(player == 1){
+        player =2;
+        realcolor = "#FFFF00";
       }else{
-        player = 0;
-        realcolor = "#FFFF00"
+        player = 1;
+        realcolor = "#FF0000"
       }
-      changeCellColor(col, storageArray[7][col], realcolor);
+      changeCellColor(col, storageArray[7][col], realcolor, player);
       storageArray[7][col]-=1
     }
 
@@ -49,19 +51,18 @@
     {#each Array(6) as _, row}
             {#each Array(7) as cell, col}
                 <Connect4
-                  key={`${row}-${col}`} 
                   row={row} 
                   col={col} 
                   fillColor={gridArray[col][row]?.fillColor || "#FFFFFF"}
                   bind:this={gridArray[col][row]} 
-                  value={cell}/>
+                  />
             {/each}
     {/each}
   </div>
     
-  <button on:click={() => changeCellColor(1, 1, '#000000')}>Change [1][1] Text Color to Green</button>
-  <button on:click={() => changeCellColor(2, 3, '#000000')}>Change [2][3] Text Color to Blue</button>
-  <button on:click={() => changeCellColor(0, 0, '#000000')}>Change [0][0] Text Color to Red</button>
+  <button on:click={() => changeCellColor(1, 1, '#000000',5)}>Change [1][1] Text Color to Green</button>
+  <button on:click={() => changeCellColor(2, 3, '#000000',5)}>Change [2][3] Text Color to Blue</button>
+  <button on:click={() => changeCellColor(0, 0, '#000000',5)}>Change [0][0] Text Color to Red</button>
 
   <button on:click={() => place(0, '#000000')}>Row 1</button>
   <button on:click={() => place(1, '#000000')}>Row 2</button>
