@@ -5,8 +5,8 @@
   import Connect4 from './lib/Connect4.svelte'
   
   let player:number = 0
-  let gridArray = Array(7).fill().map(() => Array(6).fill(null));// i used ai claude 3.7 on claude.ai to make this 2d array
-  let storageArray = Array(7).fill().map(() => Array(6).fill(null));// this is a 2d array of 7 arrays of length 6
+  let gridArray = Array(7).fill(null).map(() => Array(6).fill(null));// i used ai claude 3.7 on claude.ai to make this 2d array
+  let storageArray = Array(7).fill(null).map(() => Array(6).fill(null));// this is a 2d array of 7 arrays of length 6
 
   storageArray.push(Array(7).fill(5))// dont consider this part of the 2d array but it is  an array that stores the height of the columns
 
