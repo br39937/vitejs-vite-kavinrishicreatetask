@@ -13,9 +13,26 @@
   function changeCellColor(col: number, row: number, color: string, player: number) {
     if (gridArray[col][row]) {
         gridArray[col][row].update(color);
-        storageArray[col][row].update(player)
+        storageArray[col][row]=player;
+        checkWin(col,row,player)
 
     }
+  }
+  function checkWin(col:number,row:number,player:number): boolean{
+    const lastFour = [0,0,0,0]
+    let count:number = 0
+    if(col>2){
+      let currentCol:number = col-3
+      while (currentCol<=6){
+        console.log(storageArray[currentCol][row])
+        lastFour[count%4]=storageArray[currentCol][row]
+        console.log(lastFour)
+        count+=1;
+        currentCol+=1;
+      }
+
+    }
+    return true
   }
   function place(col:number,color: string){
     if(storageArray[7][col]>=0){
@@ -28,7 +45,7 @@
         realcolor = "#FF0000"
       }
       changeCellColor(col, storageArray[7][col], realcolor, player);
-      storageArray[7][col]-=1
+      storageArray[7][col]-=1;
     }
 
     
