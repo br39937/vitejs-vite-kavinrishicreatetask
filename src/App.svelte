@@ -19,21 +19,105 @@
     }
   }
   function checkWin(col:number,row:number,player:number): boolean{
-    const lastFour = [0,0,0,0]
+    let lastFour = [0,0,0,0]
     let count:number = 0
-    if(col>2){
-      let currentCol:number = col-3
-      while (currentCol<=6){
-        console.log(storageArray[currentCol][row])
-        lastFour[count%4]=storageArray[currentCol][row]
-        console.log(lastFour)
-        count+=1;
-        currentCol+=1;
+    let currentCol:number = col-3
+    let currentRow:number = row -3
+    if(col<3){
+      currentRow-=currentCol
+      currentCol = 0
+    }
+    if(currentRow<0){
+      currentCol-=currentRow
+      currentRow = 0
+    }
+    //console.log(currentCol)
+    //console.log(currentRow)
+    while (currentCol<=6 && currentCol<=col+3){
+      //console.log(storageArray[currentCol][row])
+      lastFour[count%4]=storageArray[currentCol][row]
+      //console.log(lastFour)
+      count+=1;
+      currentCol+=1;
+      if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
+        alert('ahuhuwf')
+      }
+    }
+    lastFour = [0,0,0,0]
+    count = 0
+    currentCol = col-3
+    currentRow = row -3
+    if(col<3){
+      currentRow-=currentCol
+      currentCol = 0
+    }
+    if(currentRow<0){
+      currentCol-=currentRow
+      currentRow = 0
+    }
+
+    while (currentCol<=6 && currentCol<=col+3 && currentRow<=5 && currentRow<=row+3){
+      //console.log(storageArray[currentCol][row])
+      lastFour[count%4]=storageArray[currentCol][currentRow]
+      //console.log(lastFour)
+      count+=1;
+      //console.log(currentCol)
+      //console.log(currentRow)
+      currentCol+=1;
+      currentRow+=1;
+      if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
+        alert('ahuhuwf')
+      }
+    }
+    lastFour = [0,0,0,0]
+    count = 0
+    currentCol = col +3
+    currentRow = row -3
+    if(currentCol>6){
+      currentRow-=(6-currentCol)
+      currentCol = 6
+    }
+    if(currentRow<0){
+      currentCol+=currentRow
+      currentRow = 0
+    }
+    while (currentCol>=0 && currentCol>=col-3 && currentRow<=5 && currentRow<=row+3){
+      //console.log(storageArray[currentCol][row])
+      console.log(currentCol)
+      console.log(currentRow)
+      lastFour[count%4]=storageArray[currentCol][currentRow]
+      //console.log(lastFour)
+      count+=1;
+      
+      currentCol-=1;
+      currentRow+=1;
+      if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
+        alert('ahuhuwf')
+      }
+    }
+    lastFour = [0,0,0,0]
+    count = 0
+    currentCol = col 
+    currentRow = row
+    if (currentRow<4){
+      lastFour[0]=storageArray[currentCol][currentRow]
+      lastFour[1]=storageArray[currentCol][currentRow+1]
+      lastFour[2]=storageArray[currentCol][currentRow+2]
+      lastFour[3]=storageArray[currentCol][currentRow+3]
+      if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
+        alert('ahuhuwf')
       }
 
     }
     return true
   }
+
+
+
+
+
+
+
   function place(col:number,color: string){
     if(storageArray[7][col]>=0){
       let realcolor:string = "#00000"

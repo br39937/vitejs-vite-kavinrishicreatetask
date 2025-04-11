@@ -17,17 +17,7 @@ div{
   border-style:solid;
   border-color:"#0000F0";
 }
-button{
-  color: #000000;
-  height: 50%;
-  font-size: 50%;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-  padding: 0 10px;
-}
+
 .inside{
   color: #000000;
   height: 50%;
