@@ -34,12 +34,7 @@
     let currentCol:number = col-3
     let currentRow:number = row -3
     if(col<3){
-      currentRow-=currentCol
       currentCol = 0
-    }
-    if(currentRow<0){
-      currentCol-=currentRow
-      currentRow = 0
     }
     //console.log(currentCol)
     //console.log(currentRow)
