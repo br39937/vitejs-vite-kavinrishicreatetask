@@ -167,9 +167,7 @@
     {/each}
   </div>
     
-  <button on:click={() => changeCellColor(1, 1, '#000000',5)}>Change [1][1] Text Color to Green</button>
-  <button on:click={() => changeCellColor(2, 3, '#000000',5)}>Change [2][3] Text Color to Blue</button>
-  <button on:click={() => changeCellColor(0, 0, '#000000',5)}>Change [0][0] Text Color to Red</button>
+
 
   <button on:click={() => place(0, '#000000')}>Row 1</button>
   <button on:click={() => place(1, '#000000')}>Row 2</button>
