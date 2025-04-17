@@ -1,9 +1,13 @@
+
+<!-- This was created using the svelte + TS template on stackblitz.com --> 
 <script lang="ts">
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
   import Connect4 from './lib/Connect4.svelte'
   
+  let backgroundColor:string="#ffffff"
+  let winner:number = 0
   let player:number = 2
   let gridArray = Array(7).fill(null).map(() => Array(6).fill(null));// i used ai claude 3.7 on claude.ai to make this 2d array
   let storageArray = Array(7).fill(null).map(() => Array(6).fill(null));// this is a 2d array of 7 arrays of length 6
@@ -14,7 +18,13 @@
     if (gridArray[col][row]) {
         gridArray[col][row].update(color);
         storageArray[col][row]=player;
-        checkWin(col,row,player)
+        if(checkWin(col,row,player)){
+            winner = player;
+            alert(`player ${player} wins`)
+            if(player==1){document.body.style.backgroundColor = "#FF0000";}
+            if(player==2){document.body.style.backgroundColor = "#FFFF00";}
+
+        }
 
     }
   }
@@ -40,7 +50,7 @@
       count+=1;
       currentCol+=1;
       if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
-        alert('ahuhuwf')
+        return(true)
       }
     }
     lastFour = [0,0,0,0]
@@ -66,7 +76,7 @@
       currentCol+=1;
       currentRow+=1;
       if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
-        alert('ahuhuwf')
+        return(true)
       }
     }
     lastFour = [0,0,0,0]
@@ -92,7 +102,7 @@
       currentCol-=1;
       currentRow+=1;
       if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
-        alert('ahuhuwf')
+        return(true)
       }
     }
     lastFour = [0,0,0,0]
@@ -105,11 +115,12 @@
       lastFour[2]=storageArray[currentCol][currentRow+2]
       lastFour[3]=storageArray[currentCol][currentRow+3]
       if(lastFour[0]==player && lastFour[1]==player && lastFour[2]==player && lastFour[3]==player){
-        alert('ahuhuwf')
+        
+        return(true)
       }
 
     }
-    return true
+    return false
   }
 
 
@@ -119,7 +130,7 @@
 
 
   function place(col:number,color: string){
-    if(storageArray[7][col]>=0){
+    if(storageArray[7][col]>=0&&winner==0){
       let realcolor:string = "#00000"
       if(player == 1){
         player =2;
@@ -184,6 +195,20 @@
 </main>
 
 <style>
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   .logo {
     height: 6em;
     padding: 1.5em;
